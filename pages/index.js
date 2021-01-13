@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/stylesheet.module.css'
 
 export default function Home() {
   return (
@@ -14,9 +14,9 @@ export default function Home() {
             <header>
             <h1>Choose Question</h1>
             <nav> 
-                <Link href = "grammar"><button type = "button" >Grammar</button></Link>
-                <Link href = "programming"><button type ="button" >Programming</button></Link>
-                <Link href = "trace"><button type = "button" >Trace</button></Link>
+                <Link href = "grammar" className={styles.navBar}><button type = "button" >Grammar</button></Link>
+                <Link href = "programming" className={styles.navBar}><button type ="button" >Programming</button></Link>
+                <Link href = "trace" className={styles.navBar}><button type = "button" >Trace</button></Link>
             </nav>
             </header>
         </div>
