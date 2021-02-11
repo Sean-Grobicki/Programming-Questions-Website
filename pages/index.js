@@ -7,9 +7,7 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>Home</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body>
         <div className={styles.container}>
             <header>
             <h1>Choose Question</h1>
@@ -20,7 +18,6 @@ export default function Home() {
             </nav>
             </header>
         </div>
-    </body>
     </div>
   );
 }

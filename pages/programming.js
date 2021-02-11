@@ -1,38 +1,55 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../styles/stylesheet.module.css'
+import React, {Component} from 'react'
 
-export default function Programming() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Programming Question</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <body>
-        <div id ="container">
-            <header>
-            <h1>Programming Question</h1>
-            <nav> 
-                <Link href = "grammar" className={styles.navBar}><button type = "button" >Grammar</button></Link>
-                <Link href = "programming" className={styles.navBar}><button type ="button" >Programming</button></Link>
-                <Link href = "trace" className={styles.navBar}><button type = "button" >Trace</button></Link>
-            </nav>
-            </header>
-            
-            <article id = "question">
-            <h2>Write a program that corresponds to the flow chart on the right below.</h2>
-            <textarea rows= "30" className={styles.textarea}>
-            
-            </textarea>
-            
-            
-            
-            </article>
-            
-            
-        </div>
-        </body>
-    </div>
-  );
+export default class Programming extends Component 
+{
+  constructor(props)
+  {
+    super(props);
+    this.state =
+    {
+
+    }
+  }
+
+  componentDidMount()
+  {
+    this.getQuestion();
+  }
+
+  async getQuestion()
+  {
+      
+  }
+
+  render()
+  {
+    return (
+      <div>
+        <Head>
+          <title>Programming</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+          <div className = {styles.container}>
+              <header>
+              <h1 className = {styles.h1}>Programming Question</h1>
+              <nav className = {styles.navBar}> 
+                  <a href = "grammar" className={styles.a}>Grammar</a>
+                  <a href = "programming" className={styles.a + ' ' + styles.active}>Programming</a>
+                  <a href = "trace" className={styles.a}>Trace</a>
+              </nav>
+              </header>
+              <article className = {styles.article}>
+                <h2 className = {styles.h2} >Write a program that corresponds to the flow chart on the right below.</h2>
+                <textarea rows= "30" className={styles.textarea}>
+                {this.props.question} 
+                </textarea>
+                <button className = {styles.button} > Submit </button>
+              </article>
+          </div>
+      </div>
+    );
+  }
 }
