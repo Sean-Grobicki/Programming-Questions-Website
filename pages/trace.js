@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../styles/stylesheet.module.css'
 import React, {Component} from 'react'
+import { get } from './api/questions';
 
 export default class Trace extends Component
  {
@@ -9,7 +10,7 @@ export default class Trace extends Component
     {
       super(props);
       this.state = {
-
+        question: [],
       };
     }
 
@@ -20,7 +21,10 @@ export default class Trace extends Component
 
     async getQuestion()
     {
-
+      const route = "/trace";
+      const headers = { 'Content-Type': 'application/json'};
+      const response = await get(route,headers);
+      this.setState({question: response});
     }
 
     render()
@@ -42,8 +46,7 @@ export default class Trace extends Component
               </header>
               <article className = {styles.article}>
                 <h2 className = {styles.h2} >Fill in the trace table to follow the changes in the following program.</h2>
-                <textarea rows= "30" className={styles.textarea}>
-                {this.props.question} 
+                <textarea rows= "30" className={styles.textarea} defaultValue = {this.state.question.msg}>
                 </textarea>
                 <button className = {styles.button} > Submit </button>
               </article>

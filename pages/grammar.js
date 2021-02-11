@@ -29,7 +29,6 @@ export default class Grammar extends Component
     const headers = { 'Content-Type': 'application/json', 'Origin' : 'http://localhost:3000/grammar'};
     const response = await get(route,headers);
     this.setState({question: response});
-    console.log(response);
   }
 
   render()
@@ -51,7 +50,7 @@ export default class Grammar extends Component
               </header>
               <article className = {styles.article}>
                 <h2 className = {styles.h2} >Fix the grammatical errors that are present in the following code. </h2>
-                <textarea rows= "30" className={styles.textarea} defaultValue = {this.state.question}/>
+                <textarea rows= "30" className={styles.textarea} defaultValue = {this.state.question.msg}/>
                 <button className = {styles.button} > Submit </button>
               </article>
           </div>

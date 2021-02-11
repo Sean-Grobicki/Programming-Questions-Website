@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../styles/stylesheet.module.css'
 import React, {Component} from 'react'
+import { get } from './api/questions';
 
 export default class Programming extends Component 
 {
@@ -10,7 +11,7 @@ export default class Programming extends Component
     super(props);
     this.state =
     {
-
+      question: [],
     }
   }
 
@@ -21,7 +22,10 @@ export default class Programming extends Component
 
   async getQuestion()
   {
-      
+    const route = "/programming";
+    const headers = { 'Content-Type': 'application/json'};
+    const response = await get(route,headers);
+    this.setState({question: response});
   }
 
   render()
@@ -43,8 +47,7 @@ export default class Programming extends Component
               </header>
               <article className = {styles.article}>
                 <h2 className = {styles.h2} >Write a program that corresponds to the flow chart on the right below.</h2>
-                <textarea rows= "30" className={styles.textarea}>
-                {this.props.question} 
+                <textarea rows= "30" className={styles.textarea} defaultValue = {this.state.question.msg}> 
                 </textarea>
                 <button className = {styles.button} > Submit </button>
               </article>
