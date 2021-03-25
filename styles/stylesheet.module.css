@@ -16,6 +16,7 @@
     flex: 1;
     align-self: center;
     margin: 1%;
+    text-align: center;
 }
 
 /* Navigation Bar */
@@ -74,6 +75,7 @@
 {
     flex: 2;
     margin: 1%;
+    text-align: center;
 }
 
 /* To split a page in two with divs grammar state 2*/
@@ -158,8 +160,8 @@
 .answerDiv
 {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* Containers to display answers side by side with title above*/

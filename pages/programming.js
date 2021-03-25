@@ -40,12 +40,12 @@ export default class Programming extends Component
               <header>
               <h1 className = {styles.h1}>Programming Question</h1>
               <nav className = {styles.navBar}> 
-                  <a href = "grammar" className={styles.a}>Grammar</a>
-                  <a href = "programming" className={styles.a + ' ' + styles.active}>Programming</a>
-                  <a href = "trace" className={styles.a}>Trace</a>
+                  <a href = "grammar" className={styles.navBarLink}>Grammar</a>
+                  <a href = "programming" className={styles.navBarLink + ' ' + styles.active}>Programming</a>
+                  <a href = "trace" className={styles.navBarLink}>Trace</a>
               </nav>
               </header>
-              <article className = {styles.article}>
+              <article className = {styles.codeInputArticle}>
                 <h2 className = {styles.h2} >Write a program that corresponds to the flow chart on the right below.</h2>
                 <textarea rows= "30" className={styles.textarea} defaultValue = {this.state.question.msg}> 
                 </textarea>

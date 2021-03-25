@@ -39,12 +39,12 @@ export default class Trace extends Component
               <header>
               <h1 className = {styles.h1}>Trace Question</h1>
               <nav className = {styles.navBar}> 
-                  <a href = "grammar" className={styles.a}>Grammar</a>
-                  <a href = "programming" className={styles.a}>Programming</a>
-                  <a href = "trace" className={styles.a + ' ' + styles.active}>Trace</a>
+                  <a href = "grammar" className={styles.navBarLink}>Grammar</a>
+                  <a href = "programming" className={styles.navBarLink}>Programming</a>
+                  <a href = "trace" className={styles.navBarLink + ' ' + styles.active}>Trace</a>
               </nav>
               </header>
-              <article className = {styles.article}>
+              <article className = {styles.codeInputArticle}>
                 <h2 className = {styles.h2} >Fill in the trace table to follow the changes in the following program.</h2>
                 <textarea rows= "30" className={styles.textarea} defaultValue = {this.state.question.msg}>
                 </textarea>

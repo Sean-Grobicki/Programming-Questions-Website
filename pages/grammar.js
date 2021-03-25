@@ -37,15 +37,22 @@ export default function Grammar(props)
     const correctLines = question.answerCode.split('\r\n');
     errorsWithCorrect.forEach(error => {
       const lineNumber = error.lineNumber-1;
-      console.log(error.lineNumber);
-      console.log("Answer: " + answerLines[lineNumber] + " Correct: " +correctLines[lineNumber]);
-      if(answerLines[lineNumber] === correctLines[lineNumber])
+      const answerLine = answerLines[lineNumber].replaceAll(/\s/g, "");
+      const correctLine = correctLines[lineNumber].replaceAll(/\s/g,"");
+      if( answerLine === correctLine)
       {
         error.correct = true;
       }
       else
       {
-        error.correct = false;
+        if(answerLines[lineNumber].includes(error.missingValue))
+        {
+          error.correct = true;
+        }
+        else
+        {
+          error.correct = false;
+        }
       }
     });
     setAnswered(true);
@@ -80,19 +87,20 @@ export default function Grammar(props)
                 </header>
                 <div className = {styles.halfArticleGS2}>
                   <div className = {styles.halfDivGS2}>
-                    <h2 className = {styles.h2} > {title} </h2>
+                    
                     <div className={styles.answerDiv}>
                       <div className={styles.verticalAnswerArea}>
                         <h3 className={styles.answerLabels}> Your Answer </h3>
-                        <textarea readOnly={true} rows="25" className={styles.answerBoxes} value={answer}  />
+                        <textarea readOnly={true} rows="12" className={styles.answerBoxes} value={answer}  />
                       </div>
                       <div className={styles.verticalAnswerArea}>
                         <h3 className={styles.answerLabels}> Correct Answer </h3>
-                        <textarea readOnly={true} rows="25" className={styles.answerBoxes} value={question.answerCode}  />
+                        <textarea readOnly={true} rows="12" className={styles.answerBoxes} value={question.answerCode}  />
                       </div>
                     </div>
                   </div>
-                <div className={styles.halfDivGS2}> 
+                <div className={styles.halfDivGS2}>
+                  <h2 className = {styles.h2} > {title} </h2> 
                   <Table errors={errors} tableStyle={styles.tablePosition}/>
                   <button className = {styles.button} onClick = {()  => getQuestion()} > Next Question </button>
                 </div>
