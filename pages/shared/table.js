@@ -1,10 +1,21 @@
-export default function Table(errors) 
+import styles from '../../styles/stylesheet.module.css'
+
+export default function Table(props) 
 {
     return (
-        <div>
-            <table>
-                
-                <TableRow err={} correct={}/>
+        <div className={props.tableStyle}>
+            <table className={styles.table} >
+                <thead>
+                    <tr className={styles.tableHeaderRow}>
+                        <th className = {styles.tableHeaderText}>Description</th>
+                        <th className = {styles.tableHeaderText}>Line Number</th>
+                        <th className = {styles.tableHeaderText}>Line Position</th>
+                        <th className = {styles.tableHeaderText}>Corrected</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.errors.map(error => <TableRow err={error} correct={true}/>)}
+                </tbody>
             </table>
         </div>
     );
@@ -12,10 +23,10 @@ export default function Table(errors)
 
 
 
-function TableRow(err,correct) 
+function TableRow(props) 
 {
     var correctedText;
-    if (correct)
+    if (props.correct)
     {
         correctedText = "Y";
     }   
@@ -24,11 +35,11 @@ function TableRow(err,correct)
         correctedText = "N";
     }
     return(
-    <tr>
-        <td>{err.description}</td>
-        <td>{err.lineNum}</td>
-        <td>{err.linePos}</td>
-        <td>{correctedText}</td>
+    <tr className ={styles.tableRow}>
+        <td>{props.err.description}</td>
+        <td className ={styles.tableCell}>{props.err.lineNum}</td>
+        <td className ={styles.tableCell}>{props.err.linePos}</td>
+        <td className ={styles.tableCell}>{correctedText}</td>
     </tr>);
 }
 
