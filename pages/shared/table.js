@@ -14,7 +14,7 @@ export default function Table(props)
                     </tr>
                 </thead>
                 <tbody>
-                    {props.errors.map(error => <TableRow err={error} correct={true}/>)}
+                    {props.errors.map(error => <TableRow err={error}/>)}
                 </tbody>
             </table>
         </div>
@@ -26,7 +26,7 @@ export default function Table(props)
 function TableRow(props) 
 {
     var correctedText;
-    if (props.correct)
+    if (props.err.correct)
     {
         correctedText = "Y";
     }   
@@ -37,8 +37,8 @@ function TableRow(props)
     return(
     <tr className ={styles.tableRow}>
         <td>{props.err.description}</td>
-        <td className ={styles.tableCell}>{props.err.lineNum}</td>
-        <td className ={styles.tableCell}>{props.err.linePos}</td>
+        <td className ={styles.tableCell}>{props.err.lineNumber}</td>
+        <td className ={styles.tableCell}>{props.err.linePosition}</td>
         <td className ={styles.tableCell}>{correctedText}</td>
     </tr>);
 }

@@ -10,7 +10,7 @@ export default function Grammar(props)
   const [question,setQuestion] = useState([]);
   const [answered, setAnswered] = useState([]);
   const [answer, setAnswer] = useState([]);
-  const [correct,setCorrect] = useState([]);
+  const [errors,setErrors] = useState([]);
 
   //If you pass [] then it works like componentDidMount without it works like componentDidUnmount.
   useEffect(() => {
@@ -24,24 +24,45 @@ export default function Grammar(props)
     const response = await get(route,headers);
     setQuestion(response);
     setAnswer(response.questionCode);
+    setErrors(response.errors);
+    setAnswered(false);
   }
 
   const markAnswer = () =>
   {
+    // This splits them with the same line numbers as intended so the correction will always be correct.
+    const errorsWithCorrect = errors;
+    const tempAnswer =  answer;
+    const answerLines = tempAnswer.toString().split('\n');
+    const correctLines = question.answerCode.split('\r\n');
+    errorsWithCorrect.forEach(error => {
+      const lineNumber = error.lineNumber-1;
+      console.log(error.lineNumber);
+      console.log("Answer: " + answerLines[lineNumber] + " Correct: " +correctLines[lineNumber]);
+      if(answerLines[lineNumber] === correctLines[lineNumber])
+      {
+        error.correct = true;
+      }
+      else
+      {
+        error.correct = false;
+      }
+    });
     setAnswered(true);
-    const errors = question.Errors;
-    console.log();
-    var correct = [];
-    for (let i =0; i < errors.length; i++)
-    {
+    setErrors(errorsWithCorrect)
 
-    }
-    setCorrect(correct);
   }
 
   if (answered === true)
     {
-      const title = "You corrected " + 4 + " out of " + 5 + " errors.";
+      var correct = 0;
+      errors.forEach(error => {
+        if(error.correct === true)
+        {
+          correct ++;
+        }
+      })
+      const title = "You corrected " + correct + " out of " + 5 + " errors.";
       return (
         <div>
           <Head>
@@ -72,8 +93,8 @@ export default function Grammar(props)
                     </div>
                   </div>
                 <div className={styles.halfDivGS2}> 
-                  <Table errors={question.Errors} tableStyle={styles.tablePosition}/>
-                  <button className = {styles.button} onClick = {()  => setAnswered(false)} > Next Question </button>
+                  <Table errors={errors} tableStyle={styles.tablePosition}/>
+                  <button className = {styles.button} onClick = {()  => getQuestion()} > Next Question </button>
                 </div>
               </div>
             </div>
@@ -94,9 +115,9 @@ export default function Grammar(props)
                   <a href = "trace" className={styles.navBarLink}>Trace</a>
               </nav>
               </header>
-              <article className = {styles.article}>
+              <article className = {styles.codeInputArticle}>
                 <h2 className = {styles.h2} >Fix the grammatical errors that are present in the following code. </h2>
-                <textarea rows="30" className={styles.textarea} value={answer} onChange={(text) => setAnswer(text)}/>
+                <textarea rows="30" className={styles.textarea} defaultValue={answer} onInput={(event) => setAnswer(event.target.value)}/>
                 <button className = {styles.button} onClick = {()  => markAnswer()} > Submit </button>
               </article>
           </div>
