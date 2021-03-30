@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../styles/stylesheet.module.css'
+import styles from '../styles/programming.module.css';
+import global from '../styles/global.module.css';
 import React, {Component} from 'react'
 import { get } from './api/questions';
 
@@ -36,20 +37,20 @@ export default class Programming extends Component
           <title>Programming</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-          <div className = {styles.container}>
+          <div className = {global.container}>
               <header>
-              <h1 className = {styles.h1}>Programming Question</h1>
-              <nav className = {styles.navBar}> 
-                  <a href = "grammar" className={styles.navBarLink}>Grammar</a>
-                  <a href = "programming" className={styles.navBarLink + ' ' + styles.active}>Programming</a>
-                  <a href = "trace" className={styles.navBarLink}>Trace</a>
+              <h1 className = {global.h1}>Programming Question</h1>
+              <nav className = {global.navBar}> 
+                  <a href = "grammar" className={global.navBarLink}>Grammar</a>
+                  <a href = "programming" className={global.navBarLink + ' ' + global.active}>Programming</a>
+                  <a href = "trace" className={global.navBarLink}>Trace</a>
               </nav>
               </header>
-              <article className = {styles.codeInputArticle}>
-                <h2 className = {styles.h2} >Write a program that corresponds to the flow chart on the right below.</h2>
-                <textarea rows= "30" className={styles.textarea} defaultValue = {this.state.question.msg}> 
+              <article className = {styles.article}>
+                <h2 className = {global.h2} >Write a program that corresponds to the flow chart on the right below.</h2>
+                <textarea rows= "30" className={styles.textarea} defaultValue = {this.state.question.questionCode}> 
                 </textarea>
-                <button className = {styles.button} > Submit </button>
+                <button className = {global.button} > Submit </button>
               </article>
           </div>
       </div>

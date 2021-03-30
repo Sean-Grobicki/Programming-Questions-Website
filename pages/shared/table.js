@@ -1,4 +1,4 @@
-import styles from '../../styles/stylesheet.module.css'
+import styles from '../../styles/grammar.module.css'
 
 export default function Table(props) 
 {

@@ -1,20 +1,20 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../styles/stylesheet.module.css'
+import global from '../styles/global.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Home</title>
       </Head>
-        <div className={styles.container}>
+        <div className={global.container}>
             <header>
-            <h1>Choose Question</h1>
-            <nav> 
-                <Link href = "grammar" className={styles.navBar}><button type = "button" >Grammar</button></Link>
-                <Link href = "programming" className={styles.navBar}><button type ="button" >Programming</button></Link>
-                <Link href = "trace" className={styles.navBar}><button type = "button" >Trace</button></Link>
+            <h1 className ={global.h1}>Choose Question</h1>
+            <nav className={global.navBar}> 
+                <a href = "grammar" className={global.active + ' '+ global.navBarLink}>Grammar</a>
+                <a href = "programming" className={global.navBarLink}>Programming</a>
+                <a href = "trace" className={global.navBarLink}>Trace</a>
             </nav>
             </header>
         </div>

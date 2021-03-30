@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../styles/stylesheet.module.css'
+import styles from '../styles/grammar.module.css';
+import global from '../styles/global.module.css';
 import React, {Component, useState, useEffect} from 'react'
 import { get } from './api/questions';
 import Table from './shared/table';
@@ -76,13 +77,13 @@ export default function Grammar(props)
             <title>Grammar</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-            <div className = {styles.container}>
+            <div className = {global.container}>
                 <header>
-                <h1 className = {styles.h1}>Grammar Question</h1>
-                <nav className = {styles.navBar}>
-                    <a href = "grammar" className={styles.active + ' '+ styles.navBarLink}>Grammar</a>
-                    <a href = "programming" className={styles.navBarLink}>Programming</a>
-                    <a href = "trace" className={styles.navBarLink}>Trace</a>
+                <h1 className = {global.h1}>Grammar Question</h1>
+                <nav className = {global.navBar}>
+                    <a href = "grammar" className={global.active + ' '+ global.navBarLink}>Grammar</a>
+                    <a href = "programming" className={global.navBarLink}>Programming</a>
+                    <a href = "trace" className={global.navBarLink}>Trace</a>
                 </nav>
                 </header>
                 <div className = {styles.halfArticleGS2}>
@@ -102,7 +103,7 @@ export default function Grammar(props)
                 <div className={styles.halfDivGS2}>
                   <h2 className = {styles.h2} > {title} </h2> 
                   <Table errors={errors} tableStyle={styles.tablePosition}/>
-                  <button className = {styles.button} onClick = {()  => getQuestion()} > Next Question </button>
+                  <button className = {global.button} onClick = {()  => getQuestion()} > Next Question </button>
                 </div>
               </div>
             </div>
@@ -114,19 +115,19 @@ export default function Grammar(props)
           <title>Grammar</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-          <div className = {styles.container}>
+          <div className = {global.container}>
               <header>
-              <h1 className = {styles.h1}>Grammar Question</h1>
-              <nav className = {styles.navBar}> 
-                  <a href = "grammar" className={styles.active + ' '+ styles.navBarLink}>Grammar</a>
-                  <a href = "programming" className={styles.navBarLink}>Programming</a>
-                  <a href = "trace" className={styles.navBarLink}>Trace</a>
+              <h1 className = {global.h1}>Grammar Question</h1>
+              <nav className = {global.navBar}> 
+                  <a href = "grammar" className={global.active + ' '+ global.navBarLink}>Grammar</a>
+                  <a href = "programming" className={global.navBarLink}>Programming</a>
+                  <a href = "trace" className={global.navBarLink}>Trace</a>
               </nav>
               </header>
               <article className = {styles.codeInputArticle}>
-                <h2 className = {styles.h2} >Fix the grammatical errors that are present in the following code. </h2>
+                <h2 className = {global.h2} >Fix the grammatical errors that are present in the following code. </h2>
                 <textarea rows="30" className={styles.textarea} defaultValue={answer} onInput={(event) => setAnswer(event.target.value)}/>
-                <button className = {styles.button} onClick = {()  => markAnswer()} > Submit </button>
+                <button className = {global.button} onClick = {()  => markAnswer()} > Submit </button>
               </article>
           </div>
         </div>
