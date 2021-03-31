@@ -1,17 +1,26 @@
-.textarea
-{
-    flex: 8;
-    width: 50%;
-    margin: 1%;
-    background: url(http://i.imgur.com/2cOaJ.png) top -12px left / auto no-repeat, 
-              linear-gradient(#F1F1F1 50%, #F9F9F9 50%) top left / 100% 32px;
-    line-height: 16px;
-    padding-left: 30px;
-}
-
 
 .article
 {
     display: flex;
     flex-direction: column;
+}
+
+.splitDiv
+{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.flowchartDiv
+{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.textareaDiv
+{
+    width: 50%;
 }
