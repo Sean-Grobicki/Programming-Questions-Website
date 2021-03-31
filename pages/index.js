@@ -12,7 +12,7 @@ export default function Home() {
             <header>
             <h1 className ={global.h1}>Choose Question</h1>
             <nav className={global.navBar}> 
-                <a href = "grammar" className={global.active + ' '+ global.navBarLink}>Grammar</a>
+                <a href = "grammar" className={global.navBarLink}>Grammar</a>
                 <a href = "programming" className={global.navBarLink}>Programming</a>
                 <a href = "trace" className={global.navBarLink}>Trace</a>
             </nav>
