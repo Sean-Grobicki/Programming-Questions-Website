@@ -8,7 +8,7 @@ import 'prismjs/components/prism-java';
 import 'prismjs/components/prism-markup';
 import styles from '../styles/programming.module.css';
 import global from '../styles/global.module.css';
-import { get } from './api/questions';
+import { get, post, getJSONProgrammingPost } from './api/questions';
 
 const Flowchart = dynamic(() => import('react-simple-flowchart'),{ssr:false,});
 
@@ -19,6 +19,7 @@ export default function Programming(props)
   const [chartCode, setchartCode] = useState(``);
   const [chartOptions,setchartOptions] = useState({});
   const [loaded, setLoaded] = useState(false);
+  const [answered, setAnswered] = useState(false);
   const [answer, setAnswer] = useState('');
 
 
@@ -34,9 +35,23 @@ export default function Programming(props)
     const route = "/programming";
     const headers = { 'Content-Type': 'application/json'};
     const response = await get(route,headers);
+    console.log(response);
     setQuestion(response);
     setAnswer(response.questionCode);
     setUpFlowchart(response.flowChart);
+  }
+
+  const sendAnswer = async() =>
+  {
+    setLoaded(false);
+    const route = "/programming";
+    const headers = {'Content-Type': 'application/json'};
+    const body = getJSONProgrammingPost(question.flowChart,answer);
+    console.log(body);
+    const response = await post(route,headers,body);
+    setAnswered(true);
+    setQuestion(response);
+    setLoaded(true);
   }
 
   const setUpFlowchart = (flowchart) =>
@@ -125,43 +140,66 @@ export default function Programming(props)
   
   if(loaded)
   {
-  return (
-    <div>
-      <Head>
-        <title>Programming</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-        <div className = {global.container}>
-          <header>
-            <h1 className = {global.h1}>Programming Question</h1>
-            <nav className = {global.navBar}> 
-              <a href = "grammar" className={global.navBarLink}>Grammar</a>
-              <a href = "programming" className={global.navBarLink + ' ' + global.active}>Programming</a>
-              <a href = "trace" className={global.navBarLink}>Trace</a>
-            </nav>
-          </header>
-          <article className = {styles.article}>
-            <h2 className = {global.h2} >Write a program that corresponds to the flow chart on the right below.</h2>
-            <div className = {styles.splitDiv}>
-              <div className={styles.textareaDiv}>
-                <Editor 
-                  value={answer}  
-                  onValueChange={(code) => setAnswer(code)}
-                  highlight={() => highlight(answer,languages.java,'java')}
-                  padding={10}
-                  tabSize={4}
-                  preClassName={global.codeInput}
-                  />
-              </div>
-              <div className={styles.flowchartDiv} >
-                <Flowchart chartCode={chartCode} options={chartOptions}/>
-              </div>
-            </div>
-            <button className = {global.button} > Submit </button>
-          </article>
+    if(answered)
+    {
+      return (
+        <div>
+        <Head>
+          <title>Programming</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+          <div className = {global.container}>
+            <header>
+              <h1 className = {global.h1}>Programming Question</h1>
+              <nav className = {global.navBar}> 
+                <a href = "grammar" className={global.navBarLink}>Grammar</a>
+                <a href = "programming" className={global.navBarLink + ' ' + global.active}>Programming</a>
+                <a href = "trace" className={global.navBarLink}>Trace</a>
+              </nav>
+            </header>
+            <p> {question.msg} </p>
+            <Flowchart chartCode={chartCode} options={chartOptions}/>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+    return (
+      <div>
+        <Head>
+          <title>Programming</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+          <div className = {global.container}>
+            <header>
+              <h1 className = {global.h1}>Programming Question</h1>
+              <nav className = {global.navBar}> 
+                <a href = "grammar" className={global.navBarLink}>Grammar</a>
+                <a href = "programming" className={global.navBarLink + ' ' + global.active}>Programming</a>
+                <a href = "trace" className={global.navBarLink}>Trace</a>
+              </nav>
+            </header>
+            <article className = {styles.article}>
+              <h2 className = {global.h2} >Write a program that corresponds to the flow chart on the right below.</h2>
+              <div className = {styles.splitDiv}>
+                <div className={styles.textareaDiv}>
+                  <Editor 
+                    value={answer}  
+                    onValueChange={(code) => setAnswer(code)}
+                    highlight={() => highlight(answer,languages.java,'java')}
+                    padding={10}
+                    tabSize={4}
+                    preClassName={global.codeInput}
+                    />
+                </div>
+                <div className={styles.flowchartDiv} >
+                  <Flowchart chartCode={chartCode} options={chartOptions}/>
+                </div>
+              </div>
+              <button className = {global.button} onClick={() => sendAnswer()} > Submit </button>
+            </article>
+          </div>
+        </div>
+      )
   }
   else
   {

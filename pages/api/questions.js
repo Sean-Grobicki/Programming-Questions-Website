@@ -27,8 +27,29 @@ const post = async(route,headers,body) =>
         });
 }
 
+
+const getJSONProgrammingPost = (flowchart,answer) =>
+{
+  var JSONArray = [];
+  flowchart.forEach(node => {
+      JSONArray.push({
+        "nodeID": node.nodeID,
+        "nodeText": node.nodeText,
+        "trueNodeChildID": node.trueNodeChildID,
+        "falseNodeChildID": node.falseNodeChildID,
+      });
+  });
+
+  var JSONObject = {
+    "flowChart" : JSONArray,
+    "questionCode": answer,    
+  }
+  return JSON.stringify(JSONObject);
+}
+
 module.exports =
 {
     get: get,
     post: post,
+    getJSONProgrammingPost: getJSONProgrammingPost,
 };
