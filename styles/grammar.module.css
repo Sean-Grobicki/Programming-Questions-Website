@@ -50,6 +50,8 @@
 {
     color: white;
     padding: 1%;
+    font-weight: bold;
+    text-align: center;
 }
 
 .tableHeaderRow

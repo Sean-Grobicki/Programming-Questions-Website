@@ -4,7 +4,7 @@ import styles from '../styles/grammar.module.css';
 import global from '../styles/global.module.css';
 import React, {Component, useState, useEffect} from 'react'
 import { get } from './api/questions';
-import Table from './shared/table';
+import Table from './shared/errorTable';
 
 export default function Grammar(props)
 {

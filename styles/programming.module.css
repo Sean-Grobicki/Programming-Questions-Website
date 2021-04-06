@@ -24,3 +24,27 @@
 {
     width: 50%;
 }
+
+.splitDiv
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.leftDiv
+{
+    display: flex;
+    flex-direction: column;
+    width:50%;
+    margin: 1%;
+}
+
+
+.rightDiv
+{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    margin: 2%;
+}

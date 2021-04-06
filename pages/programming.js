@@ -9,13 +9,14 @@ import 'prismjs/components/prism-markup';
 import styles from '../styles/programming.module.css';
 import global from '../styles/global.module.css';
 import { get, post, getJSONProgrammingPost } from './api/questions';
+import MarkingTable from './shared/markingTable.js';
 
 const Flowchart = dynamic(() => import('react-simple-flowchart'),{ssr:false,});
 
 export default function Programming(props)
 {
 
-  const [question, setQuestion] = useState({});
+  const [question, setQuestion] = useState([]);
   const [chartCode, setchartCode] = useState(``);
   const [chartOptions,setchartOptions] = useState({});
   const [loaded, setLoaded] = useState(false);
@@ -43,15 +44,13 @@ export default function Programming(props)
 
   const sendAnswer = async() =>
   {
-    setLoaded(false);
     const route = "/programming";
     const headers = {'Content-Type': 'application/json'};
     const body = getJSONProgrammingPost(question.flowChart,answer);
-    console.log(body);
     const response = await post(route,headers,body);
-    setAnswered(true);
     setQuestion(response);
-    setLoaded(true);
+    setAnswered(true);
+    
   }
 
   const setUpFlowchart = (flowchart) =>
@@ -135,13 +134,32 @@ export default function Programming(props)
   setchartOptions(options);
   setchartCode(chartNodes + chartConnections);
   setLoaded(true);
-  console.log(chartCode);
   }
   
   if(loaded)
   {
     if(answered)
     {
+      const correctOutput = question.correctOutput;
+      const theirOutput = question.compilerOutput;
+      var included = 0;
+      question.operationsTable.forEach(op => {
+          if (op.included)
+          {
+            included ++;
+          }
+      });
+      var operationNumbers = 7;
+      var outputText = "";
+      if (question.compilerOuput === question.correctOutput)
+      {
+        outputText = "and got the correct output.";
+      }
+      else
+      {
+        outputText = "and didn't get the correct output.";
+      }
+      const title = "You included "+ included + " out of " +operationNumbers+ " from the flowchart "+ outputText;
       return (
         <div>
         <Head>
@@ -157,8 +175,21 @@ export default function Programming(props)
                 <a href = "trace" className={global.navBarLink}>Trace</a>
               </nav>
             </header>
-            <p> {question.msg} </p>
-            <Flowchart chartCode={chartCode} options={chartOptions}/>
+            <h2 className={global.h2}>{title}</h2>
+            <div className={styles.splitDiv}>
+              <div className={styles.leftDiv}>
+                <h2>Correct Solution: </h2>
+                <textarea value={question.correctSolution} readOnly={true} rows={20}/>
+                <p> Correct Output: {correctOutput}</p> 
+                <h2>Your Solution </h2>
+                <textarea  value ={answer} rows = {20} readOnly={true}/>
+                <p> Your Output: {theirOutput}</p>
+              </div>
+              <div className={styles.rightDiv}>
+                <MarkingTable operations={question.operationsTable} />
+                <Flowchart chartCode={chartCode} options={chartOptions}/>
+              </div>
+            </div>
           </div>
         </div>
       )
