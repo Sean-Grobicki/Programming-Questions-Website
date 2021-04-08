@@ -149,9 +149,9 @@ export default function Programming(props)
             included ++;
           }
       });
-      var operationNumbers = 7;
+      var operationNumbers = 9;
       var outputText = "";
-      if (question.compilerOuput === question.correctOutput)
+      if (question.compilerOutput === question.correctOutput)
       {
         outputText = "and got the correct output.";
       }
@@ -178,12 +178,12 @@ export default function Programming(props)
             <h2 className={global.h2}>{title}</h2>
             <div className={styles.splitDiv}>
               <div className={styles.leftDiv}>
-                <h2>Correct Solution: </h2>
-                <textarea value={question.correctSolution} readOnly={true} rows={20}/>
-                <p> Correct Output: {correctOutput}</p> 
                 <h2>Your Solution </h2>
                 <textarea  value ={answer} rows = {20} readOnly={true}/>
                 <p> Your Output: {theirOutput}</p>
+                <h2>Correct Solution: </h2>
+                <textarea value={question.correctSolution} readOnly={true} rows={20}/>
+                <p> Correct Output: {correctOutput}</p> 
               </div>
               <div className={styles.rightDiv}>
                 <MarkingTable operations={question.operationsTable} />
