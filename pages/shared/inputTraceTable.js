@@ -1,7 +1,7 @@
 import styles from '../../styles/global.module.css'
-import {useState} from 'react';
+import { useState } from 'react';
 
-export default function InputTraceTable(props) 
+function InputTraceTable(props) 
 {
     const [var1Values,setVar1Values] = useState([null,null,null,null,null,null]);
     const [var2Values,setVar2Values] = useState([null,null,null,null,null,null]);
@@ -62,4 +62,9 @@ function InputTraceTableRow(props)
         <td className ={styles.tableCell}><input onChange={(eve) => props.addInput(stageNumber,2,eve.target.value)}/></td>
         <td className ={styles.tableCell}><input onChange={(eve) => props.addInput(stageNumber,3,eve.target.value)}/></td>
     </tr>);
+}
+
+module.exports = 
+{
+    InputTraceTable: InputTraceTable,
 }

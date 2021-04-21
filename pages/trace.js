@@ -3,8 +3,8 @@ import styles from '../styles/trace.module.css';
 import global from '../styles/global.module.css';
 import React, {useState, useEffect} from 'react';
 import { get } from './api/questions';
-import InputTrace from './shared/inputTraceTable.js';
-import OutputTrace from './shared/traceTable.js';
+import {InputTraceTable} from './shared/inputTraceTable.js';
+import {TraceTable }from './shared/traceTable.js';
 
 export default function Trace(props)
 {
@@ -101,9 +101,9 @@ export default function Trace(props)
                   </div>
                   <div className={styles.tableDiv}>
                     <h2>Your Answer </h2>
-                    <OutputTrace varNames={varNames} var1Values={var1Values} var2Values={var2Values} var3Values={var3Values} tableStyle={styles.tablePosition}/>
+                    <TraceTable varNames={varNames} var1Values={var1Values} var2Values={var2Values} var3Values={var3Values} tableStyle={styles.tablePosition}/>
                     <h2>Correct Answer </h2>
-                    <OutputTrace varNames={varNames}var1Values={correctVar1} var2Values={correctVar2} var3Values={correctVar3} tableStyle={styles.tablePosition}/>
+                    <TraceTable varNames={varNames}var1Values={correctVar1} var2Values={correctVar2} var3Values={correctVar3} tableStyle={styles.tablePosition}/>
                   </div>
                 </div>
                 <button className = {global.button} onClick={() => getQuestion()} > Next Question </button>
@@ -136,7 +136,7 @@ export default function Trace(props)
                     <textarea rows= "30" className={global.codeInput} defaultValue = {question.questionCode} />
                   </div>
                   <div className={styles.tableDiv}>
-                    <InputTrace table={question.traceTable} handleInput = {handleInput} tableStyle={styles.tablePosition}/>
+                    <InputTraceTable table={question.traceTable} handleInput = {handleInput} tableStyle={styles.tablePosition}/>
                   </div>
                 </div>
                 <button className = {global.button} onClick={() => questionAnswered() } > Submit </button>

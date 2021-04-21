@@ -40,3 +40,8 @@ function MarkingTableRow(props)
         <td className ={styles.tableCell}>{includedText}</td>
     </tr>);
 }
+
+module.exports = 
+{
+    MarkingTable: MarkingTable,
+}

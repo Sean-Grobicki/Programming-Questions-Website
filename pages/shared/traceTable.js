@@ -39,3 +39,5 @@ function TraceTableRow(props)
         <td className ={styles.tableCell}>{variable3}</td>
     </tr>);
 }
+
+module.exports = {TraceTable: TraceTable,}

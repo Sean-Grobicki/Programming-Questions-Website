@@ -4,7 +4,7 @@ import styles from '../styles/grammar.module.css';
 import global from '../styles/global.module.css';
 import React, {Component, useState, useEffect} from 'react'
 import { get } from './api/questions';
-import Table from './shared/errorTable';
+import {ErrorTable} from './shared/errorTable';
 
 export default function Grammar(props)
 {
@@ -102,7 +102,7 @@ export default function Grammar(props)
                   </div>
                 <div className={styles.halfDivGS2}>
                   <h2 className = {styles.h2} > {title} </h2> 
-                  <Table errors={errors} tableStyle={styles.tablePosition}/>
+                  <ErrorTable errors={errors} tableStyle={styles.tablePosition}/>
                   <button className = {global.button} onClick = {()  => getQuestion()} > Next Question </button>
                 </div>
               </div>
