@@ -1,7 +1,7 @@
 import styles from '../../styles/global.module.css'
 import {useState} from 'react';
 
-export default function TraceTable(props) 
+export default function InputTraceTable(props) 
 {
     const [var1Values,setVar1Values] = useState([null,null,null,null,null,null]);
     const [var2Values,setVar2Values] = useState([null,null,null,null,null,null]);
@@ -42,7 +42,7 @@ export default function TraceTable(props)
                 </thead>
                 <tbody>
                 {props.table[0].variableStages.map((variable,index) => 
-                    <TraceTableRow table={props.table} index ={index} addInput={addInput}/>
+                    <InputTraceTableRow table={props.table} index ={index} addInput={addInput}/>
                 )}
                 </tbody>
             </table>
@@ -52,7 +52,7 @@ export default function TraceTable(props)
 
 
 
-function TraceTableRow(props) 
+function InputTraceTableRow(props) 
 {
     const stageNumber = props.index;
     return(
