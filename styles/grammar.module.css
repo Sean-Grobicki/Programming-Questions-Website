@@ -32,47 +32,7 @@
     justify-content: center;
 }
 
-/*Table Position */
-.tablePosition
-{
-    flex: 10;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
-.table
-{
-    align-content: center;
-    background-color: black;
-}
-.tableHeaderText
-{
-    color: white;
-    padding: 1%;
-    font-weight: bold;
-    text-align: center;
-}
-
-.tableHeaderRow
-{
-    background-color: #1C86EE;
-
-}
-
-.tableRow
-{
-    border: black 2px solid;
-    background-color: ghostwhite;
-}
-
-/* Table Cell */
-
-.tableCell
-{
-    text-align: center;
-    padding: 1%;
-}
 
 /* Writable Text area */
 .textarea

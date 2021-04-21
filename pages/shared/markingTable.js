@@ -1,4 +1,4 @@
-import styles from '../../styles/grammar.module.css'
+import styles from '../../styles/global.module.css'
 
 export default function MarkingTable(props) 
 {
