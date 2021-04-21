@@ -36,7 +36,6 @@ export default function Programming(props)
     const route = "/programming";
     const headers = { 'Content-Type': 'application/json'};
     const response = await get(route,headers);
-    console.log(response);
     setQuestion(response);
     setAnswer(response.questionCode);
     setUpFlowchart(response.flowChart);

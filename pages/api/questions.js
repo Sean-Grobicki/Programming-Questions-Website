@@ -1,4 +1,4 @@
-const SERVERURL = 'http://localhost:3333';
+const SERVERURL = 'https://programming-questions-api.herokuapp.com';
 
 const get = async(route,header) =>
 {
