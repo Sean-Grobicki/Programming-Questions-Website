@@ -1,6 +1,6 @@
 import styles from '../../styles/global.module.css'
 
-export default function Table(props) 
+export default function ErrorTable(props) 
 {
     return (
         <div className={props.tableStyle}>
@@ -42,4 +42,3 @@ function TableRow(props)
         <td className ={styles.tableCell}>{correctedText}</td>
     </tr>);
 }
-

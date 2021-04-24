@@ -22,6 +22,7 @@ export default function Trace(props)
 
     const getQuestion = async() =>
     {
+      setLoaded(false);
       const route = "/trace";
       const headers = { 'Content-Type': 'application/json'};
       const response = await get(route,headers);
@@ -97,7 +98,7 @@ export default function Trace(props)
                 <h2 className = {global.h2} >{title} </h2>
                 <div className={styles.fullDiv}>
                   <div className={styles.codeDiv}>
-                    <textarea rows= "30" className={global.codeInput} defaultValue = {question.questionCode} />
+                    <textarea rows= "30" className={global.codeInput} readOnly={true} defaultValue = {question.questionCode} />
                   </div>
                   <div className={styles.tableDiv}>
                     <h2>Your Answer </h2>
@@ -133,7 +134,7 @@ export default function Trace(props)
                 <h2 className = {global.h2} >Fill in the trace table to follow the changes in the following program.</h2>
                 <div className={styles.fullDiv}>
                   <div className={styles.codeDiv}>
-                    <textarea rows= "30" className={global.codeInput} defaultValue = {question.questionCode} />
+                    <textarea rows= "30" className={global.codeInput} readonly = {true} defaultValue = {question.questionCode} />
                   </div>
                   <div className={styles.tableDiv}>
                     <InputTraceTable table={question.traceTable} handleInput = {handleInput} tableStyle={styles.tablePosition}/>

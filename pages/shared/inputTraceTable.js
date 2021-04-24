@@ -1,7 +1,7 @@
 import styles from '../../styles/global.module.css'
 import { useState } from 'react';
 
-function InputTraceTable(props) 
+export default function InputTraceTable(props) 
 {
     const [var1Values,setVar1Values] = useState([null,null,null,null,null,null]);
     const [var2Values,setVar2Values] = useState([null,null,null,null,null,null]);

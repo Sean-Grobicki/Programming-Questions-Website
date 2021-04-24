@@ -4,13 +4,14 @@ import styles from '../styles/grammar.module.css';
 import global from '../styles/global.module.css';
 import React, {Component, useState, useEffect} from 'react'
 import { get } from './api/questions';
-import {ErrorTable} from './shared/errorTable';
+import ErrorTable from './shared/errorTable.js';
 
 export default function Grammar(props)
 {
   const [question,setQuestion] = useState([]);
   const [answered, setAnswered] = useState([]);
   const [answer, setAnswer] = useState([]);
+  const [loaded, setLoaded] = useState(false);
   const [errors,setErrors] = useState([]);
 
   //If you pass [] then it works like componentDidMount without it works like componentDidUnmount.
@@ -20,6 +21,7 @@ export default function Grammar(props)
 
   const getQuestion = async() =>
   {
+    setLoaded(false);
     const route = "/grammar";
     const headers = { 'Content-Type': 'application/json', 'Origin' : 'http://localhost:3333/grammar'};
     const response = await get(route,headers);
@@ -27,6 +29,7 @@ export default function Grammar(props)
     setAnswer(response.questionCode);
     setErrors(response.errors);
     setAnswered(false);
+    setLoaded(true);
   }
 
   const markAnswer = () =>
@@ -35,32 +38,43 @@ export default function Grammar(props)
     const errorsWithCorrect = errors;
     const tempAnswer =  answer;
     const answerLines = tempAnswer.toString().split('\n');
-    const correctLines = question.answerCode.split('\r\n');
+    const correctLines = question.answerCode.split('\n');
     errorsWithCorrect.forEach(error => {
       const lineNumber = error.lineNumber-1;
-      const answerLine = answerLines[lineNumber].replaceAll(/\s/g, "");
-      const correctLine = correctLines[lineNumber].replaceAll(/\s/g,"");
-      if( answerLine === correctLine)
+      var answerLine;
+      if(answerLines[lineNumber] != undefined)
       {
-        error.correct = true;
-      }
-      else
-      {
-        if(answerLines[lineNumber].includes(error.missingValue))
+         answerLine = answerLines[lineNumber].replaceAll(/\s/g, "");
+        const correctLine = correctLines[lineNumber].replaceAll(/\s/g,"");
+        if( answerLine === correctLine)
         {
           error.correct = true;
         }
         else
         {
-          error.correct = false;
+          if(answerLines[lineNumber].includes(error.missingValue))
+          {
+            error.correct = true;
+          }
+          else
+          {
+            error.correct = false;
+          }
         }
+      }
+      else
+      {
+        error.correct = false;
       }
     });
     setAnswered(true);
     setErrors(errorsWithCorrect)
 
   }
-
+  if(!loaded)
+  {
+    return (<div> Loading </div>);
+  }
   if (answered === true)
     {
       var correct = 0;
