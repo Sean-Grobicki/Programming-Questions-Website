@@ -236,3 +236,44 @@ export default function Programming(props)
     return(<div> <p>Loading </p> </div>);
   }
 }
+
+function MarkingTable(props) 
+{
+    return (
+        <div className={props.tableStyle}>
+            <table className={global.table} >
+                <thead>
+                    <tr className={global.tableHeaderRow}>
+                        <td className = {global.tableHeaderText}>Operation Type</td>
+                        <td className = {global.tableHeaderText}>JavaCode</td>
+                        <td className = {global.tableHeaderText}>Included</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.operations.map(op => <MarkingTableRow op={op}/>)}
+                </tbody>
+            </table>
+        </div>
+    );
+}
+
+
+
+function MarkingTableRow(props) 
+{
+    var includedText;
+    if (props.op.included)
+    {
+        includedText = "Y";
+    }   
+    else
+    {
+        includedText = "N";
+    }
+    return(
+    <tr className ={global.tableRow}>
+        <td className={global.tableCell}> {props.op.operationType}</td>
+        <td className ={global.tableCell}>{props.op.javaCode}</td>
+        <td className ={global.tableCell}>{includedText}</td>
+    </tr>);
+}

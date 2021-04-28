@@ -3,8 +3,6 @@ import styles from '../styles/trace.module.css';
 import global from '../styles/global.module.css';
 import React, {useState, useEffect} from 'react';
 import { get } from './api/questions';
-import InputTraceTable from './shared/inputTraceTable.js';
-import TraceTable from './shared/traceTable.js';
 
 export default function Trace(props)
 {
@@ -151,4 +149,106 @@ export default function Trace(props)
     {
       return(<div> Loading </div>);
     }
+}
+
+function InputTraceTable(props) 
+{
+    const [var1Values,setVar1Values] = useState([null,null,null,null,null,null]);
+    const [var2Values,setVar2Values] = useState([null,null,null,null,null,null]);
+    const [var3Values,setVar3Values] = useState([null,null,null,null,null,null]);
+    
+    const addInput = (index,varNumber,value) =>
+    {
+        if(varNumber === 1)
+        {
+            var tempArray = var1Values;
+            tempArray[index] = value;
+            setVar1Values(tempArray);
+        }
+        else if(varNumber === 2)
+        {
+            var tempArray = var2Values;
+            tempArray[index] = value;
+            setVar2Values(tempArray);
+        }
+        else if(varNumber === 3)
+        {
+            var tempArray = var3Values;
+            tempArray[index] = value;
+            setVar3Values(tempArray);
+        }
+        props.handleInput(var1Values,var2Values,var3Values);
+    }
+    return (
+        <div className={props.tableStyle}>
+            <table className={global.table} >
+                <thead>
+                    <tr className={global.tableHeaderRow}>
+                        <td className = {global.tableHeaderText}>Counter</td>
+                        <td className = {global.tableHeaderText}>{props.table[0].variableName}</td>
+                        <td className = {global.tableHeaderText}>{props.table[1].variableName}</td>
+                        <td className = {global.tableHeaderText}>{props.table[2].variableName}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {props.table[0].variableStages.map((variable,index) => 
+                    <InputTraceTableRow table={props.table} index ={index} addInput={addInput}/>
+                )}
+                </tbody>
+            </table>
+        </div>
+    );
+}
+
+
+function InputTraceTableRow(props) 
+{
+    const stageNumber = props.index;
+    return(
+    <tr className ={global.tableRow}>
+        <td className={global.tableCell}> {stageNumber}</td>
+        <td className ={global.tableCell}><input onChange={(eve) => props.addInput(stageNumber,1,eve.target.value) }/></td>
+        <td className ={global.tableCell}><input onChange={(eve) => props.addInput(stageNumber,2,eve.target.value)}/></td>
+        <td className ={global.tableCell}><input onChange={(eve) => props.addInput(stageNumber,3,eve.target.value)}/></td>
+    </tr>);
+}
+
+function TraceTable(props) 
+{
+    return (
+        <div className={props.tableStyle}>
+            <table className={global.table} >
+                <thead>
+                    <tr className={global.tableHeaderRow}>
+                        <td className = {global.tableHeaderText}>Counter</td>
+                        <td className = {global.tableHeaderText}>{props.varNames[0]}</td>
+                        <td className = {global.tableHeaderText}>{props.varNames[1]}</td>
+                        <td className = {global.tableHeaderText}>{props.varNames[2]}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {props.var1Values.map((variable,index) => 
+                    <TraceTableRow var1Values={props.var1Values} var2Values={props.var2Values} var3Values={props.var3Values} index ={index}/>
+                )}
+                </tbody>
+            </table>
+        </div>
+    );
+}
+
+
+
+function TraceTableRow(props) 
+{
+    const stageNumber = props.index;
+    const variable1 = props.var1Values[props.index];
+    const variable2 = props.var2Values[props.index];
+    const variable3 = props.var3Values[props.index];
+    return(
+    <tr className ={global.tableRow}>
+        <td className={global.tableCell}> {stageNumber}</td>
+        <td className ={global.tableCell}>{variable1}</td>
+        <td className ={global.tableCell}>{variable2}</td>
+        <td className ={global.tableCell}>{variable3}</td>
+    </tr>);
 }

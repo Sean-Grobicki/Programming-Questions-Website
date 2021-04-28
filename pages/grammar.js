@@ -4,7 +4,6 @@ import styles from '../styles/grammar.module.css';
 import global from '../styles/global.module.css';
 import React, {Component, useState, useEffect} from 'react'
 import { get } from './api/questions';
-import ErrorTable from './shared/errorTable.js';
 
 export default function Grammar(props)
 {
@@ -146,6 +145,49 @@ export default function Grammar(props)
           </div>
         </div>
     );
+}
+
+function ErrorTable(props) 
+{
+    return (
+        <div className={props.tableStyle}>
+            <table className={global.table} >
+                <thead>
+                    <tr className={global.tableHeaderRow}>
+                        <th className = {global.tableHeaderText}>Description</th>
+                        <th className = {global.tableHeaderText}>Line Number</th>
+                        <th className = {global.tableHeaderText}>Line Position</th>
+                        <th className = {global.tableHeaderText}>Corrected</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.errors.map(error => <ErrorTableRow err={error}/>)}
+                </tbody>
+            </table>
+        </div>
+    );
+}
+
+
+
+function ErrorTableRow(props) 
+{
+    var correctedText;
+    if (props.err.correct)
+    {
+        correctedText = "Y";
+    }   
+    else
+    {
+        correctedText = "N";
+    }
+    return(
+    <tr className ={global.tableRow}>
+        <td>{props.err.description}</td>
+        <td className ={global.tableCell}>{props.err.lineNumber}</td>
+        <td className ={global.tableCell}>{props.err.linePosition}</td>
+        <td className ={global.tableCell}>{correctedText}</td>
+    </tr>);
 }
 
 
