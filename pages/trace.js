@@ -3,8 +3,8 @@ import styles from '../styles/trace.module.css';
 import global from '../styles/global.module.css';
 import React, {useState, useEffect} from 'react';
 import { get } from './api/questions';
-import {InputTraceTable} from './shared/inputTraceTable.js';
-import {TraceTable }from './shared/traceTable.js';
+import InputTraceTable from './shared/inputTraceTable.js';
+import TraceTable from './shared/traceTable.js';
 
 export default function Trace(props)
 {
