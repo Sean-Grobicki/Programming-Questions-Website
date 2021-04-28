@@ -22,7 +22,7 @@ export default function MarkingTable(props)
 
 
 
-function MarkingTableRow(props) 
+export function MarkingTableRow(props) 
 {
     var includedText;
     if (props.op.included)
@@ -39,9 +39,4 @@ function MarkingTableRow(props)
         <td className ={styles.tableCell}>{props.op.javaCode}</td>
         <td className ={styles.tableCell}>{includedText}</td>
     </tr>);
-}
-
-module.exports = 
-{
-    MarkingTable: MarkingTable,
 }

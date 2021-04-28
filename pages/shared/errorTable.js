@@ -23,7 +23,7 @@ export default function ErrorTable(props)
 
 
 
-function TableRow(props) 
+export function TableRow(props) 
 {
     var correctedText;
     if (props.err.correct)

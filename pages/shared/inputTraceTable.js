@@ -52,7 +52,7 @@ export default function InputTraceTable(props)
 
 
 
-function InputTraceTableRow(props) 
+export function InputTraceTableRow(props) 
 {
     const stageNumber = props.index;
     return(
@@ -62,9 +62,4 @@ function InputTraceTableRow(props)
         <td className ={styles.tableCell}><input onChange={(eve) => props.addInput(stageNumber,2,eve.target.value)}/></td>
         <td className ={styles.tableCell}><input onChange={(eve) => props.addInput(stageNumber,3,eve.target.value)}/></td>
     </tr>);
-}
-
-module.exports = 
-{
-    InputTraceTable: InputTraceTable,
 }

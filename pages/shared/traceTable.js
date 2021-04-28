@@ -25,7 +25,7 @@ export default function TraceTable(props)
 
 
 
-function TraceTableRow(props) 
+export function TraceTableRow(props) 
 {
     const stageNumber = props.index;
     const variable1 = props.var1Values[props.index];
@@ -39,5 +39,3 @@ function TraceTableRow(props)
         <td className ={styles.tableCell}>{variable3}</td>
     </tr>);
 }
-
-module.exports = {TraceTable: TraceTable,}
