@@ -9,7 +9,7 @@ import 'prismjs/components/prism-markup';
 import styles from '../styles/programming.module.css';
 import global from '../styles/global.module.css';
 import { get, post, getJSONProgrammingPost } from './api/questions';
-import MarkingTable from './shared/markingTable.js';
+
 
 const Flowchart = dynamic(() => import('react-simple-flowchart'),{ssr:false,});
 
