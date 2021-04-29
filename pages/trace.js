@@ -147,7 +147,25 @@ export default function Trace(props)
     }
     else
     {
-      return(<div> Loading </div>);
+      return (
+        <div>
+          <Head>
+            <title>Trace</title>
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <div className = {global.container}>
+            <header>
+              <h1 className = {global.h1}>Trace Question</h1>
+              <nav className = {global.navBar}> 
+                <a href = "grammar" className={global.navBarLink}>Grammar</a>
+                <a href = "programming" className={global.navBarLink}>Programming</a>
+                <a href = "trace" className={global.navBarLink + ' ' + global.active}>Trace</a>
+              </nav>
+            </header>
+            <h1 className={global.loading}>Loading Question ... </h1>
+          </div>
+        </div>
+        );
     }
 }
 

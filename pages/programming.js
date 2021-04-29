@@ -233,7 +233,24 @@ export default function Programming(props)
   }
   else
   {
-    return(<div> <p>Loading </p> </div>);
+    return(<div>
+      <Head>
+        <title>Programming</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+        <div className = {global.container}>
+          <header>
+            <h1 className = {global.h1}>Programming Question</h1>
+            <nav className = {global.navBar}> 
+              <a href = "grammar" className={global.navBarLink}>Grammar</a>
+              <a href = "programming" className={global.navBarLink + ' ' + global.active}>Programming</a>
+              <a href = "trace" className={global.navBarLink}>Trace</a>
+            </nav>
+          </header>
+          <h1 className={global.loading}>Loading Question ...</h1>          
+        </div>
+      </div>
+    );
   }
 }
 

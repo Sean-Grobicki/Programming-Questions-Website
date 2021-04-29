@@ -129,3 +129,10 @@
     text-align: center;
     padding: 1%;
 }
+
+.loading
+{
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+}

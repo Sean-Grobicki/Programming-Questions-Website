@@ -72,7 +72,23 @@ export default function Grammar(props)
   }
   if(!loaded)
   {
-    return (<div> Loading </div>);
+    return (<div>
+        <Head>
+          <title>Grammar</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+          <div className = {global.container}>
+              <header>
+              <h1 className = {global.h1}>Grammar Question</h1>
+              <nav className = {global.navBar}> 
+                  <a href = "grammar" className={global.active + ' '+ global.navBarLink}>Grammar</a>
+                  <a href = "programming" className={global.navBarLink}>Programming</a>
+                  <a href = "trace" className={global.navBarLink}>Trace</a>
+              </nav>
+              </header>
+              <h1 className={global.loading}>Loading Question ...</h1>
+          </div>
+        </div>);
   }
   if (answered === true)
     {
