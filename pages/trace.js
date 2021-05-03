@@ -26,6 +26,9 @@ export default function Trace(props)
       const response = await get(route,headers);
       setQuestion(response);
       setLoaded(true);
+      setVar1Values([null,null,null,null,null,null]);
+      setVar2Values([null,null,null,null,null,null]);
+      setVar3Values([null,null,null,null,null,null]);
       setAnswered(false);
     }
 
